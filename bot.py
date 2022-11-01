@@ -2,7 +2,6 @@ from telegram.ext import Updater, MessageHandler, Filters
 import os
 import utils
 from loguru import logger
-#test comment for jenkins
 class Bot:
 
     def __init__(self, token):
@@ -56,7 +55,7 @@ class YoutubeBot(Bot):
                 os.remove(f'./{video}')
 
 if __name__ == '__main__':
-    with open('secret/.telegramToken') as f:
+    with open('Secrets/.telegramToken') as f:
         _token = f.read()
 
     my_bot = YoutubeBot(_token)
