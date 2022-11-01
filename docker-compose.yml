@@ -3,5 +3,5 @@ services:
   web:
     build: .
     volumes:
-      - ./Secrets:/bot
+      - ./Secrets:/bot/Secrets
 
