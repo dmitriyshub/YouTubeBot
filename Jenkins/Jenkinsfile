@@ -22,7 +22,7 @@ pipeline {
             post {
                 always {
                     sh '''
-                    docker image prune -f --filter "label=app=bot"
+                    docker rmi $(docker images -a -q)
                     '''
                 }
             }
