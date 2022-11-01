@@ -22,7 +22,7 @@ pipeline {
             post {
                 always {
                     sh '''
-                    docker rmi $REGISTRY_URL/$IMAGE_NAME:$BUILD_NUMBER
+                    docker rmi $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG
                     '''
                 }
             }
