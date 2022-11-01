@@ -4,7 +4,7 @@ pipeline {
     environment {
         REGISTRY_URL = "573368209887.dkr.ecr.us-east-1.amazonaws.com"
         IMAGE_TAG = "0.0.$BUILD_NUMBER"
-        IMAGE_NAME = "youtube-bot"
+        IMAGE_NAME = "youtube_bot"
 
     }
 
