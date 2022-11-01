@@ -5,7 +5,6 @@ pipeline {
         REGISTRY_URL = "573368209887.dkr.ecr.us-east-1.amazonaws.com"
         IMAGE_TAG = "0.0.$BUILD_NUMBER"
         IMAGE_NAME = "youtube_bot"
-
     }
 
     stages {
@@ -27,5 +26,13 @@ pipeline {
                 }
             }
         }
+
+        stage('Trigger Deploy') {
+            steps {
+                build job: 'BotDeploy', wait: false, parameters: [
+                    string(name: 'BOT_IMAGE_NAME', value: "${REGISTRY_URL}/${IMAGE_NAME}:${IMAGE_TAG}")
+        ]
+    }
+}
     }
 }
