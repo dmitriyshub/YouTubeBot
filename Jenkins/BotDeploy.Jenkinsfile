@@ -10,7 +10,7 @@ pipeline {
         }
         stage('Stage II') {
             steps {
-                sh 'echo "stage II!!..."'
+                sh 'hostname -I | awk '{print $1}' > hosts.json'
             }
         }
         stage('Stage III ...') {
