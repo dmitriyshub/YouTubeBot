@@ -28,7 +28,7 @@ pipeline {
                    aws ecr get-login-password --region $REGION_NAME | docker login --username AWS --password-stdin $REGISTRY_URL
                    docker build -t $IMAGE_NAME:$IMAGE_TAG .
                    docker tag $IMAGE_NAME:$IMAGE_TAG $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG
-                   export SNYK_TOKEN=$SNYK_TOKEN
+                   export SNYK_TOKEN="$SNYK_TOKEN"
                    snyk container test $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG --severity-threshold=high
                    docker push $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG
                    '''
