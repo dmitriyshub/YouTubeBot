@@ -6,7 +6,7 @@
         name: '*'
         state: latest
         update_cache: yes
-        become: true
+      become: true
 
     - name: install docker
       yum:
