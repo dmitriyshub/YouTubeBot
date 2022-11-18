@@ -5,7 +5,6 @@
     state: latest
     update_cache: yes
 
----
 - name: install docker
   yum:
     name='docker'
