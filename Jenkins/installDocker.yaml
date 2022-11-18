@@ -6,14 +6,17 @@
         name: '*'
         state: latest
         update_cache: yes
+        become: true
 
     - name: install docker
       yum:
         name='docker'
         state=latest
+      become: true
 
     - name: service docker
       service:
         name=docker
         state=started
         enabled=yes
+      become: true
