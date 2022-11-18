@@ -17,3 +17,5 @@
         name: bot
         state: started
         restart_policy: always
+        volumes:
+          - "/home/ec2-user/Secrets:/bot/Secrets"
