@@ -1,10 +1,5 @@
 pipeline {
-     agent {
-        docker {
-            label 'jenkins-agent'
-            image '352708296901.dkr.ecr.us-west-2.amazonaws.com/jenkins-agent-dmitriyshub:latest'
-     }
- }
+     agent any
     stages {
         stage('Install Ansible') {
             steps {

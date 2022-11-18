@@ -34,6 +34,7 @@ pipeline {
                 always {
                     sh '''
                     docker rmi $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG
+                    docker rmi $IMAGE_NAME:$IMAGE_TAG
                     '''
                 }
             }
