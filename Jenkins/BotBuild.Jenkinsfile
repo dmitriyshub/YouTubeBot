@@ -22,6 +22,10 @@ pipeline {
     stages {
 
         stage('Build Bot app') {
+        environment{
+        SNYK_TOKEN = credentials('SNYK_TOKEN')
+        }
+
             steps {
                 withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
                    sh '''
