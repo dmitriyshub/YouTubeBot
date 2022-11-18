@@ -8,6 +8,12 @@ pipeline {
         REGION_NAME = "us-west-2"
     }
 
+    options {
+        buildDiscarder(logRotator(daysToKeepStr: '30'))
+        disableConcurrentBuilds()
+        timestamps()
+    }
+
     stages {
 
         stage('Build Bot app') {
