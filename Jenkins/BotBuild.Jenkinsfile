@@ -36,7 +36,7 @@ pipeline {
                    '''
                 }
             }
-
+        }
             post {
                 always {
                     sh '''
