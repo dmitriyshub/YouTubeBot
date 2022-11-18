@@ -1,7 +1,7 @@
 pipeline {
      agent {
         docker {
-            label 'Jenkins-Agent'
+            label 'jenkins-agent'
             image '352708296901.dkr.ecr.us-west-2.amazonaws.com/jenkins-agent-dmitriyshub:latest'
      }
  }
