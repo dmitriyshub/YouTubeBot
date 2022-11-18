@@ -32,6 +32,9 @@ pipeline {
                     '''
                 }
             }
+            options {
+                timeout(time: 10, unit: 'MINUTES')
+            }
         }
 
         stage('Trigger Deploy') {
