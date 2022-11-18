@@ -21,3 +21,4 @@ sudo yum install git -y
 # users
 sudo usermod -a -G docker ec2-user
 sudo usermod -a -G docker jenkins
+
