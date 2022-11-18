@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     environment {
-        REGISTRY_URL = "573368209887.dkr.ecr.us-east-1.amazonaws.com"
+        REGISTRY_URL = "352708296901.dkr.ecr.us-west-2.amazonaws.com"
         IMAGE_TAG = "0.0.$BUILD_NUMBER"
-        IMAGE_NAME = "youtube_bot"
+        IMAGE_NAME = "youtube-bot-dmitriyshub"
     }
 
     stages {
