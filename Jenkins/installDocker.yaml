@@ -1,17 +1,19 @@
 ---
-- name: configure / Update yum packages
-  yum:
-    name: '*'
-    state: latest
-    update_cache: yes
+- hosts: bot
+  tasks:
+    - name: configure / Update yum packages
+      yum:
+        name: '*'
+        state: latest
+        update_cache: yes
 
-- name: install docker
-  yum:
-    name='docker'
-    state=latest
+    - name: install docker
+      yum:
+        name='docker'
+        state=latest
 
-- name: service docker
-  service:
-    name=docker
-    state=started
-    enabled=yes
+    - name: service docker
+      service:
+        name=docker
+        state=started
+        enabled=yes
