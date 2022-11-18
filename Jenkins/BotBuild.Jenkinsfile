@@ -24,6 +24,13 @@ pipeline {
                     sh '''
                     docker rmi $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG
                     '''
+                    cleanWs(cleanWhenNotBuilt: false,
+                    deleteDirs: true,
+                    disableDeferredWipeout: true,
+                    notFailBuild: true,
+                    patterns: [[pattern: '.gitignore', type: 'INCLUDE'],
+                               [pattern: '.propsfile', type: 'EXCLUDE']])
+                    }
                 }
             }
         }
@@ -32,8 +39,8 @@ pipeline {
             steps {
                 build job: 'BotDeploy (YouTubeBot)', wait: false, parameters: [
                     string(name: 'BOT_IMAGE_NAME', value: "${REGISTRY_URL}/${IMAGE_NAME}:${IMAGE_TAG}")
-        ]
-    }
-}
+                ]
+            }
+        }
     }
 }
