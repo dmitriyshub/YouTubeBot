@@ -32,9 +32,8 @@ pipeline {
                docker build -t $IMAGE_NAME:$IMAGE_TAG .
                '''
 
-               withCredentials([string(credentialsId: 'snyk', variable: 'SNYK')]) {
+               withCredentials([string(credentialsId: 'snyk', variable: 'SNYK_TOKEN')]) {
                     sh '''
-                    export SNYK_TOKEN=$SNYK
                     snyk container test $IMAGE_NAME:$IMAGE_TAG --severity-threshold=high --file=Dockerfile
                     '''
                }
