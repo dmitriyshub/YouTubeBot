@@ -1,5 +1,0 @@
-{
-  "aws_region": "us-west-2",
-  "bot_to_worker_queue_name": "youTubeBot-queue-dmitriyshub",
-  "autoscaling_group_name": "youtube-worker-asg-dmitriyshub"
-}
