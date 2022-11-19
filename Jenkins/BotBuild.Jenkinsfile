@@ -23,16 +23,22 @@ pipeline {
 
         stage('Build Bot app') {
             steps {
-                withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
-                   sh '''
-                   aws ecr get-login-password --region $REGION_NAME | docker login --username AWS --password-stdin $REGISTRY_URL
-                   docker build -t $IMAGE_NAME:$IMAGE_TAG .
-                   docker tag $IMAGE_NAME:$IMAGE_TAG $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG
-                   export SNYK_TOKEN="$SNYK_TOKEN"
-                   snyk container test $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG --severity-threshold=high
-                   docker push $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG
-                   '''
-                }
+               sh '''
+               aws ecr get-login-password --region $REGION_NAME | docker login --username AWS --password-stdin $REGISTRY_URL
+               docker build -t $IMAGE_NAME:$IMAGE_TAG .
+               '''
+
+               withCredentials([string(credentialsId: 'snyk', variable: 'SNYK_TOKEN')]) {
+                    sh '''
+                    snyk container test $IMAGE_NAME:$IMAGE_TAG --severity-threshold=high --file=Dockerfile
+                    '''
+               }
+
+               sh '''
+               docker tag $IMAGE_NAME:$IMAGE_TAG $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG
+               docker push $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG
+               '''
+
             }
 
             post {
@@ -52,8 +58,8 @@ pipeline {
             steps {
                 build job: 'BotDeploy', wait: false, parameters: [
                     string(name: 'BOT_IMAGE_NAME', value: "${REGISTRY_URL}/${IMAGE_NAME}:${IMAGE_TAG}")
-        ]
-    }
-}
+                ]
+            }
+        }
     }
 }
