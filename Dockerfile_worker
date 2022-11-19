@@ -1,0 +1,11 @@
+FROM python:3.9-slim
+
+LABEL app=worker
+COPY worker.py /worker/
+COPY utils.py /worker/
+COPY Secrets/ /bot/Secrets/
+COPY requirements.txt /worker/
+WORKDIR /worker/
+RUN pip install -r requirements.txt
+
+CMD ["python3", "worker.py"]
