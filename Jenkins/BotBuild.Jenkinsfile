@@ -22,14 +22,19 @@ pipeline {
     stages {
 
         stage('Build Bot app') {
+            options {
+                timeout(time: 10, unit: 'MINUTES')
+            }
+
             steps {
                sh '''
                aws ecr get-login-password --region $REGION_NAME | docker login --username AWS --password-stdin $REGISTRY_URL
                docker build -t $IMAGE_NAME:$IMAGE_TAG .
                '''
 
-               withCredentials([string(credentialsId: 'snyk', variable: 'SNYK_TOKEN')]) {
+               withCredentials([string(credentialsId: 'snyk', variable: 'SNYK')]) {
                     sh '''
+                    SNYK_TOKEN=$SNYK
                     snyk container test $IMAGE_NAME:$IMAGE_TAG --severity-threshold=high --file=Dockerfile
                     '''
                }
@@ -38,7 +43,6 @@ pipeline {
                docker tag $IMAGE_NAME:$IMAGE_TAG $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG
                docker push $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG
                '''
-
             }
 
             post {
@@ -49,9 +53,7 @@ pipeline {
                     '''
                 }
             }
-            options {
-                timeout(time: 10, unit: 'MINUTES')
-            }
+
         }
 
         stage('Trigger Deploy') {
