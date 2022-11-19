@@ -76,7 +76,7 @@ class YoutubeObjectDetectBot(Bot):
 
 
 if __name__ == '__main__':
-    with open('secrets/.telegramToken') as f:
+    with open('Secrets/.telegramToken') as f:
         _token = f.read()
 
     with open('Secrets/config.json') as f:
