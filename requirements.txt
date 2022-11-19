@@ -3,6 +3,7 @@ yt-dlp>=2022.6.29
 loguru
 pytest
 unittest2
-
+boto3
+botocore
 pylint_junit
 pylint
