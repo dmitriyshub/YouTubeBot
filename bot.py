@@ -5,7 +5,7 @@ import botocore
 from telegram.ext import Updater, MessageHandler, Filters
 from loguru import logger
 import boto3
-from utils import calc_backlog_per_instance
+from utils import calc_backlog_per_instance_periodically
 
 
 class Bot:
@@ -54,7 +54,7 @@ class YoutubeObjectDetectBot(Bot):
     def __init__(self, token):
         super().__init__(token)
         threading.Thread(
-            target=calc_backlog_per_instance,
+            target=calc_backlog_per_instance_periodically,
             args=(workers_queue, asg, config.get("autoscaling_group_name"))
         ).start()
 
