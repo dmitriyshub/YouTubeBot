@@ -1,4 +1,4 @@
-FROM python:3.8.12-slim-buster
+FROM python:3.8.15-slim-buster
 
 LABEL app=bot
 COPY bot.py /bot/
