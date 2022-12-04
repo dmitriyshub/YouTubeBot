@@ -1,0 +1,4 @@
+podSecurityPolicy:
+  enabled: false
+  annotations: {}
+

@@ -1,0 +1,15 @@
+podSecurityPolicy:
+  enabled: false
+  annotations: {}
+
+
+fileConfigs:
+  04_outputs.conf: |-
+    <label @OUTPUT>
+      <match **>
+        @type elasticsearch
+        host "elasticsearch-svc"
+        logstash_format true
+        port 9200
+      </match>
+    </label>
